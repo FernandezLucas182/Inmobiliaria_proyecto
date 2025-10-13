@@ -6,15 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".ui.inicio.InicioFragment">
 
-    <!--
-      Este FragmentContainerView actuará como el contenedor para el mapa.
-      Es la forma moderna y recomendada de incrustar fragments dentro de layouts.
-    -->
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
+        android:layout_height="130dp"
+        android:text="Inicio-Muestra _ubicacion"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -15,7 +15,7 @@ import com.example.inmob.databinding.FragmentContratosBinding;
 
 public class ContratosFragment extends Fragment {
 
-    // 2. CAMBIO: Declarar la variable del tipo correcto
+
     private FragmentContratosBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -23,12 +23,11 @@ public class ContratosFragment extends Fragment {
         ContratosViewModel contratosViewModel =
                 new ViewModelProvider(this).get(ContratosViewModel.class);
 
-        // 3. CAMBIO: Usar la clase correcta para inflar el layout
+
         binding = FragmentContratosBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        // 4. CAMBIO: Acceder a las vistas a través del 'binding' correcto
-        // Asegúrate de que tu 'fragment_contratos.xml' tiene un TextView con el id 'textContratos'
+
         final TextView textView = binding.textContratos;
         contratosViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;

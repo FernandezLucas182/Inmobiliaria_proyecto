@@ -38,19 +38,25 @@ dependencies {
     // Para Retrofit (el cliente HTTP)
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
 
-// Para GSON (el conversor de JSON a objetos Java/Kotlin)
+    // Para GSON (el conversor de JSON a objetos Java/Kotlin)
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
-// Opcional pero recomendado: Para ver logs de las llamadas a la API en el Logcat
+    // Opcional pero recomendado: Para ver logs de las llamadas a la API en el Logcat
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
     implementation("com.google.android.gms:play-services-maps:18.2.0")
+
+    // Dependencias estables que ya tenías bien
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
-    implementation(libs.lifecycle.livedata.ktx)
-    implementation(libs.lifecycle.viewmodel.ktx)
-    implementation(libs.navigation.fragment)
-    implementation(libs.navigation.ui)
+
+    implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
+    implementation("androidx.lifecycle:lifecycle-livedata:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel:2.7.0")
+    implementation("androidx.navigation:navigation-fragment:2.7.7")
+    implementation("androidx.navigation:navigation-ui:2.7.7")
+
+
     implementation(libs.legacy.support.v4)
     implementation(libs.activity)
     testImplementation(libs.junit)

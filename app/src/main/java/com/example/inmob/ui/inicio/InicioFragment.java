@@ -14,7 +14,7 @@ public class InicioFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        //ViewBinding para inflar el layout
+
         binding = FragmentInicioBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 

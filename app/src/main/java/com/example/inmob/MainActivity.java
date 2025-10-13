@@ -2,74 +2,101 @@ package com.example.inmob;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
+
+import androidx.activity.OnBackPressedCallback;import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
 import com.example.inmob.databinding.ActivityMainBinding;
-import com.example.inmob.ui.login.LoginActivity;
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
     private MainActivityViewModel vm;
-    private NavController navController;
+    private ActivityMainBinding binding;
+    private AppBarConfiguration appBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        Log.d("FLUJO_APP", "MainActivity: onCreate - INICIADO.");
 
         vm = new ViewModelProvider(this).get(MainActivityViewModel.class);
 
-        // --- Observadores: La Vista solo REACCIONA a las órdenes del ViewModel ---
 
-        // Observador para la orden de "navegar al login"
-        vm.getNavegarALogin().observe(this, aVoid -> {
-            Intent intent = new Intent(this, LoginActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        vm.getSetupNavigationEvent().observe(this, aVoid -> {
+            Log.d("FLUJO_APP", "Evento recibido: SetupNavigation. Configurando UI...");
+
+            binding = ActivityMainBinding.inflate(getLayoutInflater());
+            setContentView(binding.getRoot());
+
+            setupNavigation();
+        });
+
+
+        vm.getRedirectToLoginEvent().observe(this, intent -> {
+            Log.d("FLUJO_APP", "Evento recibido: RedirectToLogin. Navegando a Login...");
             startActivity(intent);
+            finish();
         });
 
-        // NUEVO: Observador para la orden de "cerrar el menú"
-        vm.getCerrarDrawer().observe(this, cerrar -> {
-            binding.drawerLayout.closeDrawers();
-        });
 
-        // --- Configuración: La Vista solo CONFIGURA los componentes ---
-        setupNavigation();
+        vm.iniciarVerificacion();
     }
 
     private void setupNavigation() {
-        setSupportActionBar(binding.appBarMain.toolbar);
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
-        navController = navHostFragment.getNavController();
+        // Este método ahora se llama después de setContentView, es más seguro.
+        try {
+            appBarConfiguration = new AppBarConfiguration.Builder(
+                    R.id.nav_inicio, R.id.nav_perfil, R.id.nav_inmuebles,
+                    R.id.nav_inquilinos, R.id.nav_contratos)
+                    .setOpenableLayout(binding.drawerLayout)
+                    .build();
 
-        // El listener es un "pasamanos" puro.
-        binding.navView.setNavigationItemSelectedListener(item -> {
-            // Pasa el evento al ViewModel. El VM dirá si lo manejó.
-            boolean handledByViewModel = vm.procesarOpcionMenu(item.getItemId());
 
-            // Si el VM no lo manejó, se lo pasamos al Navigation Component.
-            // La negación '!' se ejecuta sin un 'if'.
-            boolean handledByNavUI = NavigationUI.onNavDestinationSelected(item, navController);
+            NavController navController = Navigation.findNavController(binding.getRoot().findViewById(R.id.nav_host_fragment_content_main));
 
-            // Informa al ViewModel si la navegación de UI se realizó con éxito.
-            // Esto se hace para que el VM pueda decidir si cerrar el drawer.
-            vm.navegacionExitosa();
+            setSupportActionBar(binding.appBarMain.toolbar);
+            NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+            NavigationUI.setupWithNavController(binding.navView, navController);
 
-            // Devuelve true si CUALQUIERA de los dos manejó el evento.
-            return handledByViewModel || handledByNavUI;
-        });
+            binding.navView.getMenu().findItem(R.id.nav_logout).setOnMenuItemClickListener(menuItem -> {
+                mostrarDialogoLogout();
+                return true;
+            });
 
-        NavigationUI.setupActionBarWithNavController(this, navController, binding.drawerLayout);
+            Log.d("FLUJO_APP", "setupNavigation() completado con éxito.");
+
+        } catch (Exception e) {
+            Log.e("FLUJO_APP", "CRASH DENTRO de setupNavigation()", e);
+            Toast.makeText(this, "Error de Navegación: " + e.getMessage(), Toast.LENGTH_LONG).show();
+
+            vm.logout();
+        }
     }
+
+    private void mostrarDialogoLogout() {
+        new AlertDialog.Builder(this)
+                .setTitle("Cerrar Sesión")
+                .setMessage("¿Estás seguro de que deseas salir?")
+                .setPositiveButton("Sí", (dialog, which) -> vm.logout())
+                .setNegativeButton("No", null)
+                .show();
+    }
+
 
     @Override
     public boolean onSupportNavigateUp() {
-        // La configuración de la flecha "atrás" y el botón de hamburguesa. CERO if.
-        return NavigationUI.navigateUp(navController, binding.drawerLayout) || super.onSupportNavigateUp();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        return NavigationUI.navigateUp(navController, appBarConfiguration)
+                || super.onSupportNavigateUp();
     }
 }
