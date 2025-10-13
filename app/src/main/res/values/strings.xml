@@ -1,13 +1,28 @@
 <resources>
-    <string name="app_name">inmob</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <!-- Nombre de la aplicación -->
+    <string name="app_name">Inmobiliaria</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <!-- Textos para el menú de navegación -->
+    <string name="navigation_drawer_open">Abrir menú de navegación</string>
+    <string name="navigation_drawer_close">Cerrar menú de navegación</string>
+
+    <!-- Textos para la cabecera del menú (puedes personalizarlos) -->
+    <string name="nav_header_title">Nombre Propietario</string>
+    <string name="nav_header_subtitle">propietario@mail.com</string>
+    <string name="nav_header_desc">Cabecera de navegación</string>
+
+    <!-- Título para la barra de acciones de MainActivity -->
+    <string name="title_activity_main">Inmobiliaria</string>
+
+    <!-- =============================================================== -->
+    <!-- Textos para las opciones del menú (ESTOS SON LOS IMPORTANTES)   -->
+    <!-- =============================================================== -->
+    <string name="menu_home">Inicio</string>
+    <string name="menu_profile">Perfil</string>
+    <string name="menu_inmuebles">Inmuebles</string>
+    <string name="menu_inquilinos">Inquilinos</string>
+    <string name="menu_contratos">Contratos</string>
+    <string name="menu_logout">Cerrar Sesión</string>
+    <string name="action_settings">action_settings</string>
+
 </resources>

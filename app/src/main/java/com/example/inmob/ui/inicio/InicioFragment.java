@@ -5,24 +5,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import com.example.inmob.R;
+import com.example.inmob.databinding.FragmentInicioBinding; // Usa ViewBinding
 
 public class InicioFragment extends Fragment {
-    private InicioViewModel viewModel;
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_inicio, container, false);
+    private FragmentInicioBinding binding;
+
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        //ViewBinding para inflar el layout
+        binding = FragmentInicioBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+
+
+
+        return root;
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelProvider(this).get(InicioViewModel.class);
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null; // Limpia la referencia al binding
     }
 }

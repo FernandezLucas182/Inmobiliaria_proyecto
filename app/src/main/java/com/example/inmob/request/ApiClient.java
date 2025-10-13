@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiClient {
 
     // 1. La URL base de la API. Todas las peticiones partirán de aquí.
-    private static final String BASE_URL = "https://inmobiliariaulp-amb5hwfqaraweyga.canadacentral01.azurewebsites.net/";
+    private static final String BASE_URL = "https://inmobiliariaulp-amb5hwfqaraweyga.canadacentral-01.azurewebsites.net/";
 
     // 2. Una variable para guardar la instancia de ApiService una vez creada.
     private static ApiService apiService;

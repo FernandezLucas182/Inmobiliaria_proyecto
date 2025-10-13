@@ -3,45 +3,47 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_inicio">
+    app:startDestination="@+id/nav_inicio"> <!-- El punto de partida es 'nav_inicio' -->
 
+    <!-- Y aquí está el fragmento con el ID 'nav_inicio' -->
     <fragment
-        android:id="@+id/inicioFragment"
-        android:name="com.tuapp.ui.inicio.InicioFragment"
-        android:label="Inicio"
+        android:id="@+id/nav_inicio"
+        android:name="com.example.inmob.ui.inicio.InicioFragment"
+        android:label="@string/menu_home"
         tools:layout="@layout/fragment_inicio" />
 
     <fragment
-        android:id="@+id/inmueblesFragment"
-        android:name="com.tuapp.ui.inmuebles.InmueblesFragment"
-        android:label="Inmuebles"
-        tools:layout="@layout/fragment_inmuebles">
-        <action
-            android:id="@+id/action_inmuebles_to_detalle"
-            app:destination="@id/detalleInmuebleFragment" />
-    </fragment>
+        android:id="@+id/nav_perfil"
+        android:name="com.example.inmob.ui.perfil.PerfilFragment"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_perfil" />
 
     <fragment
-        android:id="@+id/detalleInmuebleFragment"
+        android:id="@+id/nav_inmuebles"
         android:name="com.example.inmob.ui.inmuebles.InmueblesFragment"
-        android:label="Detalle Inmueble"
-        tools:layout="@layout/fragment_detalle_inmueble" />
+        android:label="@string/menu_inmuebles"
+        tools:layout="@layout/fragment_inmueble" />
 
     <fragment
-        android:id="@+id/inquilinosFragment"
-        android:name="com.example.inmob.ui.inmuebles.InmueblesFragment"
-        android:label="Inquilinos"
+        android:id="@+id/nav_inquilinos"
+        android:name="com.example.inmob.ui.inquilinos.InquilinosFragment"
+        android:label="@string/menu_inquilinos"
         tools:layout="@layout/fragment_inquilinos" />
 
     <fragment
-        android:id="@+id/contratosFragment"
-        android:name="com.example.inmob.ui.inmuebles.InmueblesFragment"
-        android:label="Contratos"
+        android:id="@+id/nav_contratos"
+        android:name="com.example.inmob.ui.contratos.ContratosFragment"
+        android:label="@string/menu_contratos"
         tools:layout="@layout/fragment_contratos" />
 
-    <fragment
-        android:id="@+id/perfilFragment"
-        android:name="com.example.inmob.ui.inmuebles.InmueblesFragment"
-        android:label="Perfil"
-        tools:layout="@layout/fragment_perfil" />
+    <!-- Destino para CERRAR SESIÓN -->
+    <!-- Destino para CERRAR SESIÓN -->
+    <activity
+        android:id="@+id/nav_logout"
+        android:name="com.example.inmob.ui.login.LoginActivity"
+        android:label="@string/menu_logout"
+        tools:layout="@layout/activity_login" />
+
+
 </navigation>
+    

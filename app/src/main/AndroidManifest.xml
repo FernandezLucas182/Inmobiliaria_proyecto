@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Permiso para que la app se conecte a internet (para el login) -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -10,18 +13,46 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Inmob">
+        android:theme="@style/Theme.Inmob"
+        tools:targetApi="31">
+
+        <!-- ======================================================================= -->
+        <!-- CORRECCIÓN #1: SplashActivity es el punto de entrada real de la app.    -->
+        <!-- Esto soluciona el problema de navegación al cerrar sesión.            -->
+        <!-- Si no tienes SplashActivity.java, debes crearla.                      -->
+        <!-- ======================================================================= -->
         <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.Inmob.NoActionBar">
+            android:name=".SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+        <!-- ======================================================================= -->
+        <!-- CORRECCIÓN #2: LoginActivity está registrada, pero ya no es LAUNCHER. -->
+        <!-- ======================================================================= -->
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:exported="false"
+            android:label="Login" />
+
+        <!-- ======================================================================= -->
+        <!-- CORRECCIÓN #3: Se eliminaron los Fragmentos (Perfil, Inicio) que       -->
+        <!-- estaban registrados erróneamente como Activity.                       -->
+        <!-- ======================================================================= -->
+
+        <!-- ======================================================================= -->
+        <!-- MainActivity está registrada correctamente, sin ser LAUNCHER.         -->
+        <!-- ======================================================================= -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.Inmob.NoActionBar" />
+
+        <!-- CORRECCIÓN #4: El <intent-filter> huérfano fue eliminado. -->
+
+    </application>
 </manifest>
