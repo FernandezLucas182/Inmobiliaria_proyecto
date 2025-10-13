@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <!-- Grupo principal de navegación, este ya lo tienes perfecto -->
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/inicioFragment"
+            android:title="Inicio"
+            android:icon="@drawable/map"/>
+        <item android:id="@+id/inmueblesFragment"
+            android:title="Inmuebles"
+            android:icon="@drawable/inmueble"/>
+        <item android:id="@+id/inquilinosFragment"
+            android:title="Inquilinos"
+            android:icon="@drawable/inquilino"/>
+        <item android:id="@+id/contratosFragment"
+            android:title="Contratos"
+            android:icon="@drawable/contrato"/>
+        <item android:id="@+id/perfilFragment"
+            android:title="Perfil"
+            android:icon="@drawable/perfil"/>
+    </group>
+
+    <!-- ==== INICIO DEL CÓDIGO A AÑADIR ==== -->
+    <!-- Grupo para acciones como "Cerrar Sesión" -->
+    <item android:title="">
+        <menu>
+            <!-- El comentario va ANTES de la etiqueta item -->
+            <!-- Asegúrate de tener un ícono de logout en res/drawable -->
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/logout"
+                android:title="Cerrar Sesión" /> <!-- La etiqueta se cierra correctamente aquí -->
+        </menu>
+    </item>
+    <!-- ==== FIN DEL CÓDIGO A AÑADIR ==== -->
+
+</menu>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_inicio">
+
+    <fragment
+        android:id="@+id/inicioFragment"
+        android:name="com.tuapp.ui.inicio.InicioFragment"
+        android:label="Inicio"
+        tools:layout="@layout/fragment_inicio" />
+
+    <fragment
+        android:id="@+id/inmueblesFragment"
+        android:name="com.tuapp.ui.inmuebles.InmueblesFragment"
+        android:label="Inmuebles"
+        tools:layout="@layout/fragment_inmuebles">
+        <action
+            android:id="@+id/action_inmuebles_to_detalle"
+            app:destination="@id/detalleInmuebleFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detalleInmuebleFragment"
+        android:name="com.example.inmob.ui.inmuebles.InmueblesFragment"
+        android:label="Detalle Inmueble"
+        tools:layout="@layout/fragment_detalle_inmueble" />
+
+    <fragment
+        android:id="@+id/inquilinosFragment"
+        android:name="com.example.inmob.ui.inmuebles.InmueblesFragment"
+        android:label="Inquilinos"
+        tools:layout="@layout/fragment_inquilinos" />
+
+    <fragment
+        android:id="@+id/contratosFragment"
+        android:name="com.example.inmob.ui.inmuebles.InmueblesFragment"
+        android:label="Contratos"
+        tools:layout="@layout/fragment_contratos" />
+
+    <fragment
+        android:id="@+id/perfilFragment"
+        android:name="com.example.inmob.ui.inmuebles.InmueblesFragment"
+        android:label="Perfil"
+        tools:layout="@layout/fragment_perfil" />
+</navigation>
