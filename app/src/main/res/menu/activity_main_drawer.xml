@@ -3,37 +3,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <!-- Grupo principal de navegación, este ya lo tienes perfecto -->
+    <!-- Grupo principal de navegación con los IDs CORREGIDOS -->
     <group android:checkableBehavior="single">
-        <item android:id="@+id/inicioFragment"
-            android:title="Inicio"
-            android:icon="@drawable/map"/>
-        <item android:id="@+id/inmueblesFragment"
-            android:title="Inmuebles"
-            android:icon="@drawable/inmueble"/>
-        <item android:id="@+id/inquilinosFragment"
-            android:title="Inquilinos"
-            android:icon="@drawable/inquilino"/>
-        <item android:id="@+id/contratosFragment"
-            android:title="Contratos"
-            android:icon="@drawable/contrato"/>
-        <item android:id="@+id/perfilFragment"
-            android:title="Perfil"
-            android:icon="@drawable/perfil"/>
+        <item
+            android:id="@+id/nav_inicio"
+            android:icon="@drawable/map"
+            android:title="Inicio" />
+        <item
+            android:id="@+id/nav_inmuebles"
+            android:icon="@drawable/inmueble"
+            android:title="Inmuebles" />
+        <item
+            android:id="@+id/nav_inquilinos"
+            android:icon="@drawable/inquilino"
+            android:title="Inquilinos" />
+        <item
+            android:id="@+id/nav_contratos"
+            android:icon="@drawable/contrato"
+            android:title="Contratos" />
+        <item
+            android:id="@+id/nav_perfil"
+            android:icon="@drawable/perfil"
+            android:title="Perfil" />
     </group>
 
-    <!-- ==== INICIO DEL CÓDIGO A AÑADIR ==== -->
     <!-- Grupo para acciones como "Cerrar Sesión" -->
     <item android:title="">
         <menu>
-            <!-- El comentario va ANTES de la etiqueta item -->
             <!-- Asegúrate de tener un ícono de logout en res/drawable -->
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/logout"
-                android:title="Cerrar Sesión" /> <!-- La etiqueta se cierra correctamente aquí -->
+                android:title="Cerrar Sesión" />
         </menu>
     </item>
-    <!-- ==== FIN DEL CÓDIGO A AÑADIR ==== -->
 
 </menu>
