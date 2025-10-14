@@ -35,6 +35,6 @@
         android:label="@string/menu_contratos"
         tools:layout="@layout/fragment_contratos" />
 
-    <!-- LOS DESTINOS DE LOGOUT HAN SIDO ELIMINADOS -->
+
 
 </navigation>

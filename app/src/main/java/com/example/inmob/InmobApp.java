@@ -21,7 +21,7 @@ import android.content.SharedPreferences;public class InmobApp extends Applicati
     public void guardarToken(String token) {
         SharedPreferences sp = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
-        // Guardamos el token que recibimos (ya debería venir con "Bearer ")
+
         editor.putString(TOKEN_KEY, token);
         editor.apply();
     }

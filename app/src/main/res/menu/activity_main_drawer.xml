@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <!-- Grupo principal de navegación con los IDs CORREGIDOS -->
+
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_inicio"
@@ -27,10 +27,10 @@
             android:title="Perfil" />
     </group>
 
-    <!-- Grupo para acciones como "Cerrar Sesión" -->
+
     <item android:title="">
         <menu>
-            <!-- Asegúrate de tener un ícono de logout en res/drawable -->
+
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/logout"
