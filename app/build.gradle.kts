@@ -1,15 +1,18 @@
 plugins {
     alias(libs.plugins.android.application)
+    // Añadimos el plugin de Kotlin que es necesario
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
     namespace = "com.example.inmob"
-    compileSdk = 36
+    // Usamos las versiones estables del archivo TOML
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.inmob"
-        minSdk = 33
-        targetSdk = 36
+        minSdk = 26// Lo bajamos para ser compatible como tu amigo
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -26,8 +29,13 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        // Usamos Java 17, el estándar actual
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    // Necesario para que Kotlin y Java 17 funcionen juntos
+    kotlinOptions {
+        jvmTarget = "17"
     }
     buildFeatures {
         viewBinding = true
@@ -35,31 +43,32 @@ android {
 }
 
 dependencies {
-    // Para Retrofit (el cliente HTTP)
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    // Core AndroidX
+    implementation(libs.androidx.appcompat)
+    implementation(libs.com.google.android.material)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.legacy.support.v4)
 
-    // Para GSON (el conversor de JSON a objetos Java/Kotlin)
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    // Lifecycle
+    implementation(libs.androidx.lifecycle.livedata)
+    implementation(libs.androidx.lifecycle.viewmodel)
 
-    // Opcional pero recomendado: Para ver logs de las llamadas a la API en el Logcat
-    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
-    implementation("com.google.android.gms:play-services-maps:18.2.0")
+    // Navigation
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.androidx.navigation.ui)
 
-    // Dependencias estables que ya tenías bien
-    implementation(libs.appcompat)
-    implementation(libs.material)
-    implementation(libs.constraintlayout)
+    // Networking (Retrofit)
+    implementation(libs.squareup.retrofit)
+    implementation(libs.squareup.converter.gson)
+    implementation(libs.squareup.converter.scalars)
+    implementation(libs.squareup.okhttp.interceptor)
 
-    implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
-    implementation("androidx.lifecycle:lifecycle-livedata:2.7.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel:2.7.0")
-    implementation("androidx.navigation:navigation-fragment:2.7.7")
-    implementation("androidx.navigation:navigation-ui:2.7.7")
+    // Mapas
+    implementation(libs.google.play.services.maps)
 
-
-    implementation(libs.legacy.support.v4)
-    implementation(libs.activity)
+    // Test
     testImplementation(libs.junit)
-    androidTestImplementation(libs.ext.junit)
-    androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.androidx.ext.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }

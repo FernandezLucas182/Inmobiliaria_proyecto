@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import com.example.inmob.databinding.FragmentInicioBinding; // Usa ViewBinding
+import com.example.inmob.databinding.FragmentInicioBinding;
 
 public class InicioFragment extends Fragment {
 
@@ -26,6 +26,6 @@ public class InicioFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null; // Limpia la referencia al binding
+        binding = null;
     }
 }
