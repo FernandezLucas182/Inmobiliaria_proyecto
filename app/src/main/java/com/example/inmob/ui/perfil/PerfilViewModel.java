@@ -53,8 +53,11 @@ public class PerfilViewModel extends AndroidViewModel {
         }
 
 
+        // ...
         ApiService api = ApiClient.getMyApiClient();
-        Call<Propietario> call = api.obtenerPerfil(token);
+        Call<Propietario> call = api.obtenerPerfil("Bearer " + token); // <- LÍNEA CORREGIDA
+// ...
+
 
 
         call.enqueue(new Callback<Propietario>() {
