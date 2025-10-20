@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:padding="24dp">
 
-        <!-- Título de la pantalla -->
+        <!-- ... (Todos tus EditText y TextViews se quedan igual) ... -->
         <TextView
             android:id="@+id/tvTituloPerfil"
             android:layout_width="wrap_content"
@@ -22,7 +22,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Campo Código -->
         <TextView
             android:id="@+id/tvLabelCodigo"
             android:layout_width="wrap_content"
@@ -43,7 +42,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvLabelCodigo" />
 
-        <!-- Campo DNI -->
         <TextView
             android:id="@+id/tvLabelDni"
             android:layout_width="wrap_content"
@@ -64,7 +62,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvLabelDni" />
 
-        <!-- Campo Apellido -->
         <TextView
             android:id="@+id/tvLabelApellido"
             android:layout_width="wrap_content"
@@ -85,7 +82,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvLabelApellido" />
 
-        <!-- Campo Nombre -->
         <TextView
             android:id="@+id/tvLabelNombre"
             android:layout_width="wrap_content"
@@ -106,7 +102,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvLabelNombre" />
 
-        <!-- Campo Email -->
         <TextView
             android:id="@+id/tvLabelEmail"
             android:layout_width="wrap_content"
@@ -127,7 +122,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvLabelEmail" />
 
-        <!-- Campo Contraseña -->
         <TextView
             android:id="@+id/tvLabelPassword"
             android:layout_width="wrap_content"
@@ -148,7 +142,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvLabelPassword" />
 
-        <!-- Campo Teléfono -->
         <TextView
             android:id="@+id/tvLabelTelefono"
             android:layout_width="wrap_content"
@@ -169,16 +162,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvLabelTelefono" />
 
-        <!-- Botón de Edición -->
+
+        <!-- ===================== CORRECCIÓN ===================== -->
+        <!-- Botón de Edición: Ahora solo es visible cuando no se está editando -->
         <Button
             android:id="@+id/btnEditar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="Editar mis datos"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/etTelefono" />
+
+        <!-- Botón de Guardar: Tiene el ID correcto y está oculto por defecto -->
+        <Button
+            android:id="@+id/btnGuardar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Guardar Cambios"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etTelefono" />
+        <!-- ======================================================== -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

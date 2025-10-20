@@ -1,44 +1,36 @@
 package com.example.inmob.ui.login;
 
 import android.app.Application;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 import android.util.Patterns;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
-// Importamos la clase principal de la API
+import com.example.inmob.InmobApp;
 import com.example.inmob.request.ApiClient;
-// IMPORTANTE: Importamos la interfaz ApiService que descubrimos gracias al error
 import com.example.inmob.request.ApiService;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginViewModel extends AndroidViewModel {
-    private final Context context;
-    private final MutableLiveData<String> mToken;
-    private final MutableLiveData<String> mError;
 
-
-    private ApiService apiService;
+    private final MutableLiveData<String> mError = new MutableLiveData<>();
+    // Evento para notificar a la Activity que el login fue exitoso.
+    private final MutableLiveData<Boolean> loginExitosoEvent = new MutableLiveData<>();
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
-        this.context = application.getApplicationContext();
-        this.mToken = new MutableLiveData<>();
-        this.mError = new MutableLiveData<>();
-
-
-        this.apiService = ApiClient.getMyApiClient();
     }
 
-    public LiveData<String> getToken() { return mToken; }
-    public LiveData<String> getError() { return mError; }
+    public LiveData<String> getError() {
+        return mError;
+    }
+
+    public LiveData<Boolean> getLoginExitosoEvent() {
+        return loginExitosoEvent;
+    }
 
     public void iniciarSesion(String email, String password) {
         if (email == null || email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
@@ -50,38 +42,29 @@ public class LoginViewModel extends AndroidViewModel {
             return;
         }
 
-
+        ApiService apiService = ApiClient.getMyApiClient();
         Call<String> call = apiService.login(email, password);
 
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    String tokenRespuesta = response.body();
-                    String authToken = "Bearer " + tokenRespuesta;
-                    guardarToken(authToken);
-                    mToken.postValue(authToken);
+                    Log.d("LoginVM", "Login exitoso. Token recibido.");
+                    // Delegamos a InmobApp la tarea de guardar el token.
+                    InmobApp.guardarToken(response.body());
+                    // Notificamos a la Activity que el proceso terminó.
+                    loginExitosoEvent.postValue(true);
                 } else {
-                    Log.d("LoginError", "Respuesta no exitosa: " + response.code());
-                    mError.postValue("Usuario o contraseña incorrectos.");
+                    Log.d("LoginVM", "Respuesta no exitosa: " + response.code());
+                    mError.setValue("Usuario o contraseña incorrectos.");
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
-                Log.e("LoginFailure", "Fallo en la llamada a la API", t);
-                mError.postValue("Error de conexión con el servidor. Intente más tarde.");
+                Log.e("LoginVM", "Fallo en la llamada a la API", t);
+                mError.setValue("Error de conexión. Verifique su red.");
             }
         });
-    }
-
-    private void guardarToken(String token) {
-        final String PREFS_NAME = "auth_prefs";
-        final String TOKEN_KEY = "auth_token";
-
-        SharedPreferences sp = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putString(TOKEN_KEY, token);
-        editor.apply();
     }
 }

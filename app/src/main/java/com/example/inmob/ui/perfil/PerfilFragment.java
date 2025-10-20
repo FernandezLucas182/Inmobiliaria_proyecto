@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.inmob.databinding.FragmentPerfilBinding;
+import com.example.inmob.model.Propietario;
 
 public class PerfilFragment extends Fragment {
 
@@ -18,62 +19,114 @@ public class PerfilFragment extends Fragment {
     private FragmentPerfilBinding binding;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-
-        Log.d("FLUJO_APP", "PerfilFragment: onCreateView INICIADO (inflando vista).");
-
-
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentPerfilBinding.inflate(inflater, container, false);
         perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
 
-        binding = FragmentPerfilBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        setupObservers();
+        setupButtonClickListeners();
 
-
-        Log.d("FLUJO_APP", "PerfilFragment: Vista inflada. Configurando observadores...");
-
-
-        perfilViewModel.getPropietario().observe(getViewLifecycleOwner(), propietario -> {
-            if (propietario != null) {
-
-                Log.d("FLUJO_APP", "PerfilFragment: Observer de Propietario activado. Actualizando UI.");
-
-                binding.etCodigo.setText(String.valueOf(propietario.getId()));
-                binding.etDni.setText(propietario.getDni());
-                binding.etApellido.setText(propietario.getApellido());
-                binding.etNombre.setText(propietario.getNombre());
-                binding.etEmail.setText(propietario.getEmail());
-                binding.etPassword.setText("");
-                binding.etTelefono.setText(propietario.getTelefono());
-            }
-        });
-
-        perfilViewModel.getError().observe(getViewLifecycleOwner(), error -> {
-            if (error != null && !error.isEmpty()) {
-
-                Log.e("FLUJO_APP", "PerfilFragment: Observer de Error activado: " + error);
-
-                Toast.makeText(getContext(), error, Toast.LENGTH_LONG).show();
-            }
-        });
-
-        binding.btnEditar.setOnClickListener(v -> {
-
-        });
-
-        return root;
+        return binding.getRoot();
     }
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        Log.d("FLUJO_APP", "PerfilFragment: onViewCreated INICIADO. Llamando a cargarPropietario().");
-
         perfilViewModel.cargarPropietario();
     }
 
+    private void setupObservers() {
+        // Observador para los datos del propietario
+        perfilViewModel.getPropietario().observe(getViewLifecycleOwner(), propietario -> {
+            if (propietario != null) {
+                Log.d("PerfilFragment", "Datos del propietario recibidos. Actualizando UI.");
+                // ===================== CORRECCIÓN =====================
+                // Usamos los métodos de tu clase Propietario: getId()
+                binding.etCodigo.setText(String.valueOf(propietario.getId()));
+                // ========================================================
+                binding.etDni.setText(propietario.getDni());
+                binding.etApellido.setText(propietario.getApellido());
+                binding.etNombre.setText(propietario.getNombre());
+                binding.etEmail.setText(propietario.getEmail());
+                binding.etPassword.setText(""); // La contraseña nunca se muestra
+            }
+        });
+
+        // Observador para el modo de edición
+        perfilViewModel.getEditMode().observe(getViewLifecycleOwner(), isEditing -> {
+            setEditMode(isEditing);
+        });
+
+        // Observador para mensajes de error
+        perfilViewModel.getError().observe(getViewLifecycleOwner(), error -> {
+            if (error != null && !error.isEmpty()) {
+                Toast.makeText(getContext(), error, Toast.LENGTH_LONG).show();
+            }
+        });
+
+        // Observador para mensajes de éxito
+        perfilViewModel.getExito().observe(getViewLifecycleOwner(), exito -> {
+            if (exito != null && !exito.isEmpty()) {
+                Toast.makeText(getContext(), exito, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void setupButtonClickListeners() {
+        // El botón "EDITAR" ahora solo le dice al ViewModel que cambie de modo.
+        binding.btnEditar.setOnClickListener(v -> {
+            perfilViewModel.cambiarModoEdicion();
+        });
+
+        // El botón "GUARDAR" recoge los datos y los envía al ViewModel.
+        binding.btnGuardar.setOnClickListener(v -> {
+
+            // ===================== CORRECCIÓN =====================
+            // Obtenemos el objeto Propietario actual que ya tiene el ViewModel.
+            // Esto es CRUCIAL porque contiene todos los datos originales (como el avatar y la contraseña).
+            Propietario propietarioActual = perfilViewModel.getPropietario().getValue();
+
+            // Si por alguna razón es nulo, no hacemos nada para evitar un crash.
+            if (propietarioActual == null) {
+                Toast.makeText(getContext(), "Error: No se pueden obtener los datos actuales del perfil.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Creamos un nuevo objeto para enviar, o modificamos el actual.
+            // Modificar el actual es más seguro.
+            propietarioActual.setDni(binding.etDni.getText().toString());
+            propietarioActual.setApellido(binding.etApellido.getText().toString());
+            propietarioActual.setNombre(binding.etNombre.getText().toString());
+            propietarioActual.setTelefono(binding.etTelefono.getText().toString());
+
+            // El Email y la Contraseña no se tocan, se quedan como estaban en el objeto original.
+            // El ID ya está en el objeto, así que no hay que hacerle setId().
+
+            Log.d("PerfilFragment", "Enviando actualización a la API...");
+            perfilViewModel.actualizarPerfil(propietarioActual);
+            // ========================================================
+        });
+    }
+
+
+    private void setEditMode(boolean enabled) {
+        binding.etDni.setEnabled(enabled);
+        binding.etApellido.setEnabled(enabled);
+        binding.etNombre.setEnabled(enabled);
+        binding.etEmail.setEnabled(enabled);
+        binding.etTelefono.setEnabled(enabled);
+
+        // Campos que nunca se editan
+        binding.etCodigo.setEnabled(false);
+        binding.etPassword.setEnabled(false);
+        binding.etEmail.setEnabled(false);
+
+        // ===================== CORRECCIÓN =====================
+        // Muestra y oculta los botones correctos según el modo
+        binding.btnGuardar.setVisibility(enabled ? View.VISIBLE : View.GONE);
+        binding.btnEditar.setVisibility(enabled ? View.GONE : View.VISIBLE);
+        // ========================================================
+    }
 
     @Override
     public void onDestroyView() {

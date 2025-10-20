@@ -2,39 +2,46 @@ package com.example.inmob;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.SharedPreferences;public class InmobApp extends Application {
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.util.Log;
+import com.example.inmob.ui.login.LoginActivity;
 
-    private static InmobApp instance;
+public class InmobApp extends Application {
+
+    private static Context context;
     private static final String PREFS_NAME = "auth_prefs";
     private static final String TOKEN_KEY = "auth_token";
 
     @Override
     public void onCreate() {
         super.onCreate();
-        instance = this;
+        context = getApplicationContext();
+        Log.d("InmobApp", "SessionManager inicializado.");
     }
 
-    public static InmobApp getInstance() {
-        return instance;
+    // Guarda el token recibido del login, añadiéndole el prefijo "Bearer ".
+    public static void guardarToken(String token) {
+        SharedPreferences sp = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        String bearerToken = "Bearer " + token;
+        sp.edit().putString(TOKEN_KEY, bearerToken).apply();
+        Log.d("InmobApp", "Token guardado exitosamente.");
     }
 
-    public void guardarToken(String token) {
-        SharedPreferences sp = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-
-        editor.putString(TOKEN_KEY, token);
-        editor.apply();
+    // Obtiene el token completo ("Bearer ...") para usar en las llamadas a la API.
+    public static String obtenerToken() {
+        SharedPreferences sp = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return sp.getString(TOKEN_KEY, null);
     }
 
-    public String obtenerToken() {
-        SharedPreferences sp = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        return sp.getString(TOKEN_KEY, null); // Devuelve null si no hay token
-    }
+    // Elimina el token y redirige forzosamente a la pantalla de Login.
+    public static void cerrarSesion() {
+        SharedPreferences sp = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        sp.edit().remove(TOKEN_KEY).apply();
+        Log.d("InmobApp", "Token eliminado. Sesión cerrada.");
 
-    public void cerrarSesion() {
-        SharedPreferences sp = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.remove(TOKEN_KEY);
-        editor.apply();
+        Intent intent = new Intent(context, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(intent);
     }
 }

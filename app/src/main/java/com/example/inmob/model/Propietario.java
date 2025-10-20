@@ -13,7 +13,10 @@ public class Propietario implements Serializable {
     private String telefono;
     private String avatar; // El campo existe
 
-    // Constructor completo
+    public Propietario() {
+    }
+
+
     public Propietario(int id, String dni, String apellido, String nombre, String email, String password, String telefono, String avatar) {
         this.id = id;
         this.dni = dni;
