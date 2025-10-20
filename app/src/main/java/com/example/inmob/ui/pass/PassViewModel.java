@@ -46,7 +46,7 @@ public class PassViewModel extends AndroidViewModel {
 
 
         Call<Void> call = ApiClient.getMyApiClient().cambiarClave(
-                "Bearer " + token,
+                token,
                 passActual,
                 passNueva
         );
