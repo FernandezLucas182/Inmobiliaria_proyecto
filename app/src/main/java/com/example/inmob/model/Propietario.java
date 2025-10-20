@@ -1,17 +1,38 @@
 package com.example.inmob.model;
 
+import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class Propietario implements Serializable {
 
+
+
+    @SerializedName("idPropietario")
     private int id;
+
+    @SerializedName("dni")
     private String dni;
+
+    @SerializedName("apellido")
     private String apellido;
+
+    @SerializedName("nombre")
     private String nombre;
+
+    @SerializedName("email")
     private String email;
+
+    @SerializedName("clave")
     private String password;
+
+    @SerializedName("telefono")
     private String telefono;
-    private String avatar; // El campo existe
+
+
+    @SerializedName("avatar")
+    private String avatar;
+
+
 
     public Propietario() {
     }
@@ -28,71 +49,21 @@ public class Propietario implements Serializable {
         this.avatar = avatar;
     }
 
-    // Getters y Setters para todos los campos
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    // --- ¡AQUÍ ESTÁ LA SOLUCIÓN! ---
-    // El getter y setter que faltaban para el campo 'avatar'
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+    public String getDni() { return dni; }
+    public void setDni(String dni) { this.dni = dni; }
+    public String getApellido() { return apellido; }
+    public void setApellido(String apellido) { this.apellido = apellido; }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
+    public String getTelefono() { return telefono; }
+    public void setTelefono(String telefono) { this.telefono = telefono; }
+    public String getAvatar() { return avatar; }
+    public void setAvatar(String avatar) { this.avatar = avatar; }
 }

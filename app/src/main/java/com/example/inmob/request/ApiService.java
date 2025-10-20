@@ -24,13 +24,20 @@ public interface ApiService {
     Call<Propietario> obtenerPerfil(@Header("Authorization") String token);
 
 
-    // ================== MÉTODO AÑADIDO ==================
-    // Este endpoint es necesario para que la función de "Guardar Perfil" funcione.
-    // Envía los datos del propietario en el cuerpo de la petición.
-    @PUT("api/propietarios") // Corregido a minúsculas y plural
+
+    @PUT("api/propietarios/actualizar") // Corregido a minúsculas y plural
     Call<Propietario> actualizarPerfil(
             @Header("Authorization") String token,
             @Body Propietario propietario
+    );
+
+
+    @FormUrlEncoded
+    @PUT("api/Propietarios/changePassword")
+    Call<Void> cambiarClave(
+            @Header("Authorization") String token,
+            @Field("currentPassword") String actual,
+            @Field("newPassword") String nueva
     );
     // ======================================================
 

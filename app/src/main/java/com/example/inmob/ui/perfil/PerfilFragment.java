@@ -9,7 +9,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+
+import com.example.inmob.R;
 import com.example.inmob.databinding.FragmentPerfilBinding;
 import com.example.inmob.model.Propietario;
 
@@ -36,19 +41,31 @@ public class PerfilFragment extends Fragment {
     }
 
     private void setupObservers() {
-        // Observador para los datos del propietario
+
         perfilViewModel.getPropietario().observe(getViewLifecycleOwner(), propietario -> {
             if (propietario != null) {
                 Log.d("PerfilFragment", "Datos del propietario recibidos. Actualizando UI.");
-                // ===================== CORRECCIÓN =====================
-                // Usamos los métodos de tu clase Propietario: getId()
+
+
                 binding.etCodigo.setText(String.valueOf(propietario.getId()));
-                // ========================================================
+
                 binding.etDni.setText(propietario.getDni());
                 binding.etApellido.setText(propietario.getApellido());
                 binding.etNombre.setText(propietario.getNombre());
                 binding.etEmail.setText(propietario.getEmail());
                 binding.etPassword.setText(""); // La contraseña nunca se muestra
+                binding.etTelefono.setText(propietario.getTelefono());
+            }
+        });
+
+        perfilViewModel.getNavegar().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean navegarCambiarClave) {
+                if (Boolean.TRUE.equals(navegarCambiarClave)) {
+                    perfilViewModel.resetNavegar();
+                    NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
+                    navController.navigate(R.id.action_perfilFragment_to_PassFragment);
+                }
             }
         });
 
@@ -77,34 +94,39 @@ public class PerfilFragment extends Fragment {
         binding.btnEditar.setOnClickListener(v -> {
             perfilViewModel.cambiarModoEdicion();
         });
-
+        //btn cambiar clave
+        binding.btnCambiarPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                perfilViewModel.onNavegarClicked();
+            }
+        });
         // El botón "GUARDAR" recoge los datos y los envía al ViewModel.
         binding.btnGuardar.setOnClickListener(v -> {
 
-            // ===================== CORRECCIÓN =====================
+
             // Obtenemos el objeto Propietario actual que ya tiene el ViewModel.
-            // Esto es CRUCIAL porque contiene todos los datos originales (como el avatar y la contraseña).
+
             Propietario propietarioActual = perfilViewModel.getPropietario().getValue();
 
-            // Si por alguna razón es nulo, no hacemos nada para evitar un crash.
+
             if (propietarioActual == null) {
                 Toast.makeText(getContext(), "Error: No se pueden obtener los datos actuales del perfil.", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Creamos un nuevo objeto para enviar, o modificamos el actual.
-            // Modificar el actual es más seguro.
+
             propietarioActual.setDni(binding.etDni.getText().toString());
             propietarioActual.setApellido(binding.etApellido.getText().toString());
             propietarioActual.setNombre(binding.etNombre.getText().toString());
             propietarioActual.setTelefono(binding.etTelefono.getText().toString());
 
-            // El Email y la Contraseña no se tocan, se quedan como estaban en el objeto original.
-            // El ID ya está en el objeto, así que no hay que hacerle setId().
+
+
 
             Log.d("PerfilFragment", "Enviando actualización a la API...");
             perfilViewModel.actualizarPerfil(propietarioActual);
-            // ========================================================
+
         });
     }
 
@@ -121,11 +143,12 @@ public class PerfilFragment extends Fragment {
         binding.etPassword.setEnabled(false);
         binding.etEmail.setEnabled(false);
 
-        // ===================== CORRECCIÓN =====================
+
         // Muestra y oculta los botones correctos según el modo
         binding.btnGuardar.setVisibility(enabled ? View.VISIBLE : View.GONE);
         binding.btnEditar.setVisibility(enabled ? View.GONE : View.VISIBLE);
-        // ========================================================
+        binding.btnCambiarPassword.setVisibility(enabled ? View.GONE : View.VISIBLE);
+
     }
 
     @Override

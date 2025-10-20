@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class LoginResponse {
 
-    @SerializedName("token") // Asegúrate que "token" sea el nombre exacto del campo en el JSON de respuesta.
+    @SerializedName("token")
     private String token;
 
     public String getToken() {

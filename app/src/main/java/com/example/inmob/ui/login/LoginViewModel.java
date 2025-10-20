@@ -17,7 +17,7 @@ import retrofit2.Response;
 public class LoginViewModel extends AndroidViewModel {
 
     private final MutableLiveData<String> mError = new MutableLiveData<>();
-    // Evento para notificar a la Activity que el login fue exitoso.
+
     private final MutableLiveData<Boolean> loginExitosoEvent = new MutableLiveData<>();
 
     public LoginViewModel(@NonNull Application application) {
@@ -50,9 +50,9 @@ public class LoginViewModel extends AndroidViewModel {
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Log.d("LoginVM", "Login exitoso. Token recibido.");
-                    // Delegamos a InmobApp la tarea de guardar el token.
+
                     InmobApp.guardarToken(response.body());
-                    // Notificamos a la Activity que el proceso terminó.
+
                     loginExitosoEvent.postValue(true);
                 } else {
                     Log.d("LoginVM", "Respuesta no exitosa: " + response.code());

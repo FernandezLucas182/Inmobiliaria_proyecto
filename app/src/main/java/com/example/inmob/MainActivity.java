@@ -19,10 +19,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Primero, verificamos si hay un token. Si no, InmobApp nos redirigirá.
+
         if (InmobApp.obtenerToken() == null) {
             Log.d("MainActivity", "No hay token, cerrando MainActivity para ir a Login.");
-            // InmobApp se encargará de la redirección, pero cerramos esta activity por si acaso.
+
             finish();
             return;
         }
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        // El logout ahora es una llamada directa a nuestro SessionManager
+
         binding.navView.getMenu().findItem(R.id.nav_logout).setOnMenuItemClickListener(menuItem -> {
             mostrarDialogoLogout();
             return true;

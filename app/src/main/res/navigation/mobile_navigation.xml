@@ -15,7 +15,19 @@
         android:id="@+id/nav_perfil"
         android:name="com.example.inmob.ui.perfil.PerfilFragment"
         android:label="@string/menu_profile"
-        tools:layout="@layout/fragment_perfil" />
+        tools:layout="@layout/fragment_perfil"
+
+        >
+        <action
+            android:id="@+id/action_perfilFragment_to_PassFragment"
+            app:destination="@id/nav_pass" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_pass"
+        android:name="com.example.inmob.ui.pass.PassFragment"
+        android:label="@string/cambiar_clave"
+        tools:layout="@layout/fragment_pass" />
 
     <fragment
         android:id="@+id/nav_inmuebles"

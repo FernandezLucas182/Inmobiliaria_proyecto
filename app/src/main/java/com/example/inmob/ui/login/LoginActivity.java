@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
 
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
-        // Observador para el evento de login exitoso
+
         loginViewModel.getLoginExitosoEvent().observe(this, exitoso -> {
             if (exitoso) {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -30,15 +30,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        // Observador para los mensajes de error
+
         loginViewModel.getError().observe(this, error -> {
             if (error != null && !error.isEmpty()) {
                 Toast.makeText(this, error, Toast.LENGTH_LONG).show();
             }
         });
 
-        // Asegúrate que los IDs en tu activity_login.xml sean "etEmail" y "etPassword"
-        // Si usas otros IDs como "etUser" o "etPass", cámbialos aquí.
+
         binding.btnIngresar.setOnClickListener(v -> {
             String email = binding.etUser.getText().toString();
             String password = binding.etPass.getText().toString();

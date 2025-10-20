@@ -20,7 +20,7 @@ public class InmobApp extends Application {
         Log.d("InmobApp", "SessionManager inicializado.");
     }
 
-    // Guarda el token recibido del login, añadiéndole el prefijo "Bearer ".
+
     public static void guardarToken(String token) {
         SharedPreferences sp = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         String bearerToken = "Bearer " + token;
@@ -28,13 +28,13 @@ public class InmobApp extends Application {
         Log.d("InmobApp", "Token guardado exitosamente.");
     }
 
-    // Obtiene el token completo ("Bearer ...") para usar en las llamadas a la API.
+
     public static String obtenerToken() {
         SharedPreferences sp = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         return sp.getString(TOKEN_KEY, null);
     }
 
-    // Elimina el token y redirige forzosamente a la pantalla de Login.
+
     public static void cerrarSesion() {
         SharedPreferences sp = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         sp.edit().remove(TOKEN_KEY).apply();

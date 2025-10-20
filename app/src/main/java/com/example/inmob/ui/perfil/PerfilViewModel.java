@@ -25,12 +25,15 @@ public class PerfilViewModel extends AndroidViewModel {
     // LiveData para notificar a la vista sobre el éxito de una operación
     private final MutableLiveData<String> mExito;
 
+    private final MutableLiveData<Boolean> mNavegar; // Nuevo LiveData para navegar
+
     public PerfilViewModel(@NonNull Application application) {
         super(application);
         this.mPropietario = new MutableLiveData<>();
         this.mError = new MutableLiveData<>();
         this.mEditMode = new MutableLiveData<>(false); // Por defecto, no está en modo edición
         this.mExito = new MutableLiveData<>();
+        this.mNavegar = new MutableLiveData<>(false); // Inicialmente, no navegamos
     }
 
     public LiveData<Propietario> getPropietario() {
@@ -49,9 +52,24 @@ public class PerfilViewModel extends AndroidViewModel {
         return mExito;
     }
 
+
+    public LiveData<Boolean> getNavegar() {
+        return mNavegar;
+    }
+
+    public void onNavegarClicked() {
+        mNavegar.setValue(true);
+    }
+
+    public void resetNavegar() {
+        mNavegar.setValue(false);
+    }
+
+
+
     // Carga los datos del perfil del propietario
     public void cargarPropietario() {
-        // Obtenemos el token desde nuestro SessionManager centralizado
+
         String token = InmobApp.obtenerToken();
 
         if (token == null) {
@@ -60,7 +78,7 @@ public class PerfilViewModel extends AndroidViewModel {
         }
 
         ApiService api = ApiClient.getMyApiClient();
-        Call<Propietario> call = api.obtenerPerfil(token); // Le pasamos el token directamente
+        Call<Propietario> call = api.obtenerPerfil(token);
 
         call.enqueue(new Callback<Propietario>() {
             @Override
@@ -82,7 +100,7 @@ public class PerfilViewModel extends AndroidViewModel {
         });
     }
 
-    // Actualiza los datos del propietario en el servidor
+
     public void actualizarPerfil(Propietario propietario) {
         String token = InmobApp.obtenerToken();
         if (token == null) {
@@ -91,8 +109,7 @@ public class PerfilViewModel extends AndroidViewModel {
         }
 
         ApiService api = ApiClient.getMyApiClient();
-        // NOTA: Asegúrate que tu ApiService tenga el método "actualizarPerfil".
-        // Lo añadiremos en el siguiente paso si no lo tienes.
+
         Call<Propietario> call = api.actualizarPerfil(token, propietario);
 
         call.enqueue(new Callback<Propietario>() {
@@ -101,9 +118,9 @@ public class PerfilViewModel extends AndroidViewModel {
                 if (response.isSuccessful() && response.body() != null) {
                     // Si el servidor confirma la actualización, actualizamos los datos locales
                     mPropietario.postValue(response.body());
-                    // Cambiamos al modo "ver"
+
                     mEditMode.postValue(false);
-                    // Enviamos un mensaje de éxito a la vista
+
                     mExito.postValue("Perfil actualizado con éxito.");
                     Log.d("PerfilVM", "Perfil actualizado con éxito.");
                 } else {
@@ -120,7 +137,7 @@ public class PerfilViewModel extends AndroidViewModel {
         });
     }
 
-    // Cambia el estado del modo edición
+
     public void cambiarModoEdicion() {
         boolean isEditing = mEditMode.getValue() != null && mEditMode.getValue();
         mEditMode.setValue(!isEditing);

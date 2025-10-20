@@ -24,5 +24,6 @@
     <string name="menu_contratos">Contratos</string>
     <string name="menu_logout">Cerrar Sesión</string>
     <string name="action_settings">action_settings</string>
+    <string name="cambiar_clave">cambiar clave</string>
 
 </resources>

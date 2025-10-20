@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:padding="24dp">
 
-        <!-- ... (Todos tus EditText y TextViews se quedan igual) ... -->
+        <!-- ... (Todos tus TextView y EditText hasta el de Teléfono se quedan igual) ... -->
         <TextView
             android:id="@+id/tvTituloPerfil"
             android:layout_width="wrap_content"
@@ -35,9 +35,9 @@
             android:id="@+id/etCodigo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:hint="Código del propietario"
             android:inputType="number"
-            android:enabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvLabelCodigo" />
@@ -55,9 +55,9 @@
             android:id="@+id/etDni"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:hint="Número de Documento"
             android:inputType="number"
-            android:enabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvLabelDni" />
@@ -75,9 +75,9 @@
             android:id="@+id/etApellido"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:hint="Apellido del propietario"
             android:inputType="textPersonName"
-            android:enabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvLabelApellido" />
@@ -95,9 +95,9 @@
             android:id="@+id/etNombre"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:hint="Nombre del propietario"
             android:inputType="textPersonName"
-            android:enabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvLabelNombre" />
@@ -115,9 +115,9 @@
             android:id="@+id/etEmail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:hint="Correo electrónico"
             android:inputType="textEmailAddress"
-            android:enabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvLabelEmail" />
@@ -135,9 +135,9 @@
             android:id="@+id/etPassword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:hint="********"
             android:inputType="textPassword"
-            android:enabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvLabelPassword" />
@@ -155,28 +155,17 @@
             android:id="@+id/etTelefono"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:hint="Número de teléfono"
             android:inputType="phone"
-            android:enabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvLabelTelefono" />
 
 
-        <!-- ===================== CORRECCIÓN ===================== -->
-        <!-- Botón de Edición: Ahora solo es visible cuando no se está editando -->
-        <Button
-            android:id="@+id/btnEditar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="Editar mis datos"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etTelefono" />
+        <!-- ===================== BOTONES LADO A LADO ===================== -->
 
-        <!-- Botón de Guardar: Tiene el ID correcto y está oculto por defecto -->
+        <!-- Botón de Guardar: Ocupa todo el ancho, pero sigue oculto por defecto -->
         <Button
             android:id="@+id/btnGuardar"
             android:layout_width="0dp"
@@ -187,6 +176,33 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/etTelefono" />
+
+        <!-- Botón de Edición: Ahora es el primer elemento de la cadena -->
+        <Button
+            android:id="@+id/btnEditar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:text="Editar"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@+id/btnCambiarPassword"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etTelefono" />
+
+        <!-- Botón Cambiar Contraseña: Segundo elemento de la cadena, con estilo "outlined" -->
+        <Button
+            android:id="@+id/btnCambiarPassword"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Cambiar Clave"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnEditar"
+            app:layout_constraintTop_toTopOf="@id/btnEditar" />
+
         <!-- ======================================================== -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
