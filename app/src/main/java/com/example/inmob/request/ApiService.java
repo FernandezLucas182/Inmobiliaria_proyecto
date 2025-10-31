@@ -1,6 +1,12 @@
 package com.example.inmob.request;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import com.example.inmob.model.Inmueble;
 import com.example.inmob.model.Propietario;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -19,6 +25,21 @@ public interface ApiService {
             @Field("Usuario") String email,
             @Field("Clave") String password
     );
+
+
+
+
+//    public static void guardarToken(Context context, String token){
+//        SharedPreferences sp = context.getSharedPreferences("token.xml", Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sp.edit();
+//        editor.putString("token", token);
+//        editor.apply();
+//    }
+//
+//    public static String leerToken(Context context) {
+//        SharedPreferences sp = context.getSharedPreferences("token.xml", Context.MODE_PRIVATE);
+//        return sp.getString("token", null);
+//    }
 
     @GET("api/propietarios") // Corregido a minúsculas y plural
     Call<Propietario> obtenerPerfil(@Header("Authorization") String token);
@@ -40,5 +61,12 @@ public interface ApiService {
             @Field("newPassword") String nueva
     );
     // ======================================================
+
+    @GET("api/Inmuebles")
+    Call<List<Inmueble>> obtenerInmuebles(@Header("Authorization") String token);
+
+
+
+
 
 }

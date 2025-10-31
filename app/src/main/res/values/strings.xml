@@ -25,5 +25,8 @@
     <string name="menu_logout">Cerrar Sesión</string>
     <string name="action_settings">action_settings</string>
     <string name="cambiar_clave">cambiar clave</string>
+    <string name="precio">Precio</string>
+    <string name="tipo">Tipo</string>
+    <string name="direccion">Direccion</string>
 
 </resources>

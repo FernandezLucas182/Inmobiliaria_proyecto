@@ -7,7 +7,7 @@ plugins {
 android {
     namespace = "com.example.inmob"
     // Usamos las versiones estables del archivo TOML
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.inmob"
@@ -44,6 +44,7 @@ android {
 
 dependencies {
     // Core AndroidX
+
     implementation(libs.androidx.appcompat)
     implementation(libs.com.google.android.material)
     implementation(libs.androidx.constraintlayout)
@@ -66,6 +67,10 @@ dependencies {
 
     // Mapas
     implementation(libs.google.play.services.maps)
+
+    implementation(libs.glide)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.cardview)
 
     // Test
     testImplementation(libs.junit)

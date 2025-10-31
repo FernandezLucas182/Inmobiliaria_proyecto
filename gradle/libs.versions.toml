@@ -1,34 +1,37 @@
 
 [versions]
 # Plugins
-agp = "8.3.1" # Android Gradle Plugin
+agp = "8.13.0" # Android Gradle Plugin
 kotlin = "1.9.22"
 
 # SDKs
 minSdk = "24"
-compileSdk = "34"
+compileSdk = "35"
 targetSdk = "34"
 
-# AndroidX & Material (Versiones estables inspiradas en tu amigo)
+# AndroidX & Material
 appcompat = "1.6.1"       # Versión más estable que 1.7.1
-activity = "1.8.2"        # ¡¡LA CLAVE!! La misma versión que tu amigo.
+activity = "1.8.2"
 constraintlayout = "2.1.4" # Versión más estable que 2.2.1
-material = "1.11.0"       # Versión más estable que 1.13.0
-lifecycle = "2.7.0"       # Unificamos lifecycle
-navigation = "2.7.7"      # Mantenemos la tuya que es estable
+material = "1.11.0"
+lifecycle = "2.7.0"
+navigation = "2.7.7"
 legacySupportV4 = "1.0.0"
 
 # Networking
 retrofit = "2.9.0"
-okhttp = "4.10.0" # La de tu amigo es más reciente y segura
+okhttp = "4.10.0"
 
 # Mapas
-maps = "18.2.0" # La tuya es más reciente, la mantenemos
+maps = "18.2.0"
 
 # Testing
 junit = "4.13.2"
 extJunit = "1.1.5"
 espressoCore = "3.5.1"
+recyclerview = "1.4.0"
+glide = "4.16.0"
+cardview = "1.0.0"
 
 
 [libraries]
@@ -60,6 +63,9 @@ google-play-services-maps = { group = "com.google.android.gms", name = "play-ser
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "extJunit" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+androidx-cardview = { group = "androidx.cardview", name = "cardview", version.ref = "cardview" }
 
 
 [plugins]

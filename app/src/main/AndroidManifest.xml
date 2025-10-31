@@ -23,10 +23,10 @@
             android:exported="false"
             android:label="@string/app_name"
             android:theme="@style/Theme.Inmob.NoActionBar">
-            <!-- El intent-filter que estaba aquí fue movido -->
+
         </activity>
 
-        <!-- LoginActivity es AHORA la actividad de lanzamiento -->
+        <!-- LoginActivity es la actividad de lanzamiento -->
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true"
