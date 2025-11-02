@@ -2,7 +2,8 @@ package com.example.inmob.request;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import com.example.inmob.model.Inmueble;
 import com.example.inmob.model.Propietario;
 
@@ -14,8 +15,10 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT; // Asegúrate de importar PUT
+import retrofit2.http.Part;
 
 public interface ApiService {
 
@@ -80,6 +83,17 @@ public interface ApiService {
             @Header("Authorization") String token,
             @Body Inmueble inmueble // La API espera el objeto completo en el cuerpo
     );
+
+    @Multipart
+    @POST("api/Inmuebles/cargar") // Asegúrate que la ruta es correcta según tu API
+    Call<Inmueble> cargarInmueble(
+            @Header("Authorization") String token,
+            @Part MultipartBody.Part ImagenFile,
+            @Part("Inmueble") RequestBody inmueble
+
+    );
+
+
 
 
 

@@ -1,13 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.inmuebles.AgregarInmuebleFragment">
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="wrap_content"
+        android:padding="16dp">
 
-</FrameLayout>
+        <!-- Campo Dirección -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilDireccion"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Dirección"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDireccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Campo Uso (Adaptado a EditText) -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilUso"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Uso (Ej: Residencial, Comercial)"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilDireccion">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etUso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Campo Tipo (Adaptado a EditText) -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilTipo"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Tipo (Ej: Casa, Departamento)"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilUso">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etTipo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Campos en una fila: Ambientes y Superficie -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilAmbientes"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:hint="Ambientes"
+            app:layout_constraintEnd_toStartOf="@id/tilSuperficie"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilTipo">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAmbientes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilSuperficie"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:hint="Superficie (m²)"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tilAmbientes"
+            app:layout_constraintTop_toTopOf="@id/tilAmbientes">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etSuperficie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Campo Precio -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPrecio"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Precio ($)"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilAmbientes">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPrecio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- CheckBox para Disponibilidad -->
+        <CheckBox
+            android:id="@+id/cbDisponible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Disponible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilPrecio" />
+
+        <!-- Vista Previa de Imagen y Botón para seleccionar -->
+        <ImageView
+            android:id="@+id/ivFotoInmueble"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/material_grey_300"
+            android:contentDescription="Vista previa de la imagen del inmueble"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cbDisponible"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <!-- Botón para seleccionar imagen con el ID correcto -->
+        <Button
+            android:id="@+id/btnAgregarFoto"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Seleccionar Imagen"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivFotoInmueble" />
+
+        <!-- Botón para Guardar el Inmueble con el ID correcto -->
+        <Button
+            android:id="@+id/btnAgregarInmueble"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:padding="12dp"
+            android:text="Guardar Inmueble"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnAgregarFoto" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
