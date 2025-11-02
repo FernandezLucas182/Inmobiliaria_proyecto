@@ -13,41 +13,70 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="12dp">
+        android:padding="0dp"> <!-- Quitado el padding para que la imagen ocupe todo el ancho -->
 
-        <ImageView
-            android:id="@+id/imgInmueble"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:scaleType="centerCrop"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            android:layout_height="160dp">
 
-        <TextView
-            android:id="@+id/tvDireccion"
+            <ImageView
+                android:id="@+id/imgInmueble"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            <!-- ========================================================== -->
+            <!-- ==       NUEVO TEXTVIEW PARA LA DIRECCIÓN (SOBRE LA FOTO) == -->
+            <!-- ========================================================== -->
+            <TextView
+                android:id="@+id/tvDireccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="#80000000"
+                android:padding="8dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                tools:text="Av. Siempre Viva 742" />
+        </FrameLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textAppearance="?attr/textAppearanceTitleMedium"
-            android:textStyle="bold"
-            tools:text="Av. Siempre Viva 742" />
+            android:orientation="vertical"
+            android:padding="12dp">
 
-        <TextView
-            android:id="@+id/tvTipo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            tools:text="Casa" />
+            <TextView
+                android:id="@+id/tvTipo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Casa" />
 
-        <TextView
-            android:id="@+id/tvPrecio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="end"
-            android:textAppearance="?attr/textAppearanceTitleLarge"
-            android:textColor="?attr/colorPrimary"
-            android:textStyle="bold"
-            tools:text="$ 150.000,00" />
+            <!-- ========================================================== -->
+            <!-- ==       NUEVO TEXTVIEW PARA LA DISPONIBILIDAD            == -->
+            <!-- ========================================================== -->
+            <TextView
+                android:id="@+id/tvDisponible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textStyle="bold"
+                tools:text="Disponible"
+                tools:textColor="@android:color/holo_green_dark" />
+
+            <TextView
+                android:id="@+id/tvPrecio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="end"
+                android:textAppearance="?attr/textAppearanceTitleLarge"
+                android:textColor="?attr/colorPrimary"
+                android:textStyle="bold"
+                tools:text="$ 150.000,00" />
+        </LinearLayout>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

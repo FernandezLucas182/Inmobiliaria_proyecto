@@ -66,6 +66,21 @@ public interface ApiService {
     Call<List<Inmueble>> obtenerInmuebles(@Header("Authorization") String token);
 
 
+    // =================================================================
+    //  NUEVO ENDPOINT PARA ACTUALIZAR EL ESTADO DE UN INMUEBLE
+    // =================================================================
+    /**
+     * Actualiza la información de un inmueble existente.
+     * Sigue la documentación oficial de la API.
+     * Método: PUT
+     * Ruta: /api/Inmuebles/actualizar
+     */
+    @PUT("api/Inmuebles/actualizar")
+    Call<Inmueble> actualizarInmueble(
+            @Header("Authorization") String token,
+            @Body Inmueble inmueble // La API espera el objeto completo en el cuerpo
+    );
+
 
 
 
