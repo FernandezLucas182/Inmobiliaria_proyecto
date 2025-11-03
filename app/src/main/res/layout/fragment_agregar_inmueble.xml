@@ -29,7 +29,7 @@
                 android:inputType="textCapWords" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Campo Uso (Adaptado a EditText) -->
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilUso"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -48,7 +48,7 @@
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Campo Tipo (Adaptado a EditText) -->
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilTipo"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -67,7 +67,7 @@
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Campos en una fila: Ambientes y Superficie -->
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilAmbientes"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -105,7 +105,7 @@
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Campo Precio -->
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilPrecio"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -124,7 +124,7 @@
                 android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- CheckBox para Disponibilidad -->
+
         <CheckBox
             android:id="@+id/cbDisponible"
             android:layout_width="wrap_content"
@@ -134,7 +134,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tilPrecio" />
 
-        <!-- Vista Previa de Imagen y Botón para seleccionar -->
+
         <ImageView
             android:id="@+id/ivFotoInmueble"
             android:layout_width="match_parent"
@@ -148,7 +148,7 @@
             app:layout_constraintTop_toBottomOf="@id/cbDisponible"
             tools:src="@tools:sample/backgrounds/scenic" />
 
-        <!-- Botón para seleccionar imagen con el ID correcto -->
+
         <Button
             android:id="@+id/btnAgregarFoto"
             android:layout_width="0dp"
@@ -159,7 +159,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivFotoInmueble" />
 
-        <!-- Botón para Guardar el Inmueble con el ID correcto -->
+
         <Button
             android:id="@+id/btnAgregarInmueble"
             android:layout_width="0dp"

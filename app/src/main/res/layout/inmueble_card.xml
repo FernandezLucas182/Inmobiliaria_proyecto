@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="0dp"> <!-- Quitado el padding para que la imagen ocupe todo el ancho -->
+        android:padding="0dp">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -26,9 +26,7 @@
                 android:scaleType="centerCrop"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-            <!-- ========================================================== -->
-            <!-- ==       NUEVO TEXTVIEW PARA LA DIRECCIÓN (SOBRE LA FOTO) == -->
-            <!-- ========================================================== -->
+
             <TextView
                 android:id="@+id/tvDireccion"
                 android:layout_width="match_parent"
@@ -54,9 +52,7 @@
                 android:layout_height="wrap_content"
                 tools:text="Casa" />
 
-            <!-- ========================================================== -->
-            <!-- ==       NUEVO TEXTVIEW PARA LA DISPONIBILIDAD            == -->
-            <!-- ========================================================== -->
+
             <TextView
                 android:id="@+id/tvDisponible"
                 android:layout_width="wrap_content"

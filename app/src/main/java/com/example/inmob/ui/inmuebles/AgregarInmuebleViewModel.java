@@ -127,7 +127,7 @@ public class AgregarInmuebleViewModel extends AndroidViewModel {
     }
     private byte[] transformarImagen() {
         try {
-            Uri uri = mUri.getValue();  //lo puedo usar porque estoy en viewmodel
+            Uri uri = mUri.getValue();
             InputStream inputStream = getApplication().getContentResolver().openInputStream(uri);
             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

@@ -5,13 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable; // Import para @Nullable
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation; // Import para la navegación
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.inmob.R; // Import para R.id
+import com.example.inmob.R;
 import com.example.inmob.databinding.FragmentInmuebleBinding;
 import java.util.ArrayList;
 
@@ -42,21 +42,16 @@ public class InmueblesFragment extends Fragment {
         return root;
     }
 
-    // ==========================================================
-    // ==        AÑADIMOS EL MÉTODO onViewCreated             ==
-    // == (El lugar correcto para configurar listeners)      ==
-    // ==========================================================
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         binding.fabAgregarInmueble.setOnClickListener(v -> {
-            // Reemplaza 'action_nav_inmuebles_to_agregarInmuebleFragment'
-            // con el ID de la acción que creaste en tu mobile_navigation.xml
+
             Navigation.findNavController(v).navigate(R.id.action_nav_inmuebles_to_agregarInmuebleFragment);
         });
     }
-    // ==========================================================
 
 
     @Override

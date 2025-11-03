@@ -15,9 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    ========================================================== -->
-    <!-- ==      AÑADE ESTE BOTÓN FLOTANTE (FAB)                 == -->
-    <!-- ========================================================== -->
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAgregarInmueble"
         android:layout_width="wrap_content"
@@ -27,6 +25,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:contentDescription="Agregar un nuevo inmueble" />
-    <!-- ========================================================== -->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

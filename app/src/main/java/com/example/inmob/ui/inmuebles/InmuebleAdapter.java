@@ -2,8 +2,8 @@ package com.example.inmob.ui.inmuebles;
 
 import static com.example.inmob.request.ApiClient.BASE_URL;
 
-import android.os.Bundle; // Necesario para pasar datos a la siguiente pantalla
-import androidx.navigation.Navigation; // Necesario para activar la navegación
+import android.os.Bundle;
+import androidx.navigation.Navigation;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -54,12 +54,10 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.Inmueb
         holder.tvDireccion.setText(i.getDireccion());
         holder.tvTipo.setText(i.getTipo());
 
-        // 1. FORMATEO DE MONEDA PROFESIONAL
-        // Esto mostrará el precio con separadores de miles y símbolo de moneda.
-        // Ejemplo: $ 150,000.00
+
         NumberFormat formatoMoneda = NumberFormat.getCurrencyInstance(new Locale("es", "AR"));
         holder.tvPrecio.setText(formatoMoneda.format(i.getValor()));
-        //holder.imgInmueble.setImageResource(R.drawable.img);
+
 
         Glide.with(context)
                 .load(BASE_URL + i.getImagen())
@@ -68,46 +66,35 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.Inmueb
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.imgInmueble);
 
-        // ==========================================================
-        // ==       NUEVA LÓGICA PARA EL TEXTVIEW DISPONIBLE        ==
-        // ==========================================================
+
         if (i.getDisponible()) {
             holder.tvDisponible.setText("Disponible");
-            // Usamos ContextCompat para obtener colores de forma segura
             holder.tvDisponible.setTextColor(ContextCompat.getColor(context, android.R.color.holo_green_dark));
         } else {
             holder.tvDisponible.setText("No Disponible");
             holder.tvDisponible.setTextColor(ContextCompat.getColor(context, android.R.color.holo_red_dark));
         }
 
-        // ===================================
-        // == CAMBIO 1: AÑADIR LA LÓGICA DEL CLIC ==
-        // Esto es NUEVO. Implementa la funcionalidad que te falta.
-        //====================================
+
         holder.itemView.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
-            bundle.putSerializable("inmueble", i); // Empaqueta el inmueble en el que se hizo clic
+            bundle.putSerializable("inmueble", i);
 
-            // Llama al sistema de navegación para ir al fragmento de detalle
+
             Navigation.findNavController(v).navigate(R.id.action_nav_inmuebles_to_detalleInmuebleFragment, bundle);
         });
     }
 
     @Override
     public int getItemCount() {
-        // Pequeña mejora: evitamos un NullPointerException si la lista es nula.
         return lista != null ? lista.size() : 0;
         //return lista.size();
     }
 
 
-    // ===================================
-    // == CAMBIO 2: IMPLEMENTAR setInmuebles ==
-    // Arregla tu método vacío para que ahora sí actualice la lista.
-    //====================================
     public void setInmuebles(List<Inmueble> inmuebles) {
-        this.lista = inmuebles; // Reemplaza la lista vieja por la nueva
-        notifyDataSetChanged(); // Le dice al RecyclerView: "¡Hey, los datos cambiaron, redibújate!"
+        this.lista = inmuebles;
+        notifyDataSetChanged();
     }
 
 
@@ -125,8 +112,7 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.Inmueb
             tvDisponible = itemView.findViewById(R.id.tvDisponible);
             //idCV = itemView.findViewById(R.id.id_CardView);
 
-            // Opcional:  agregar un OnClickListener a toda la tarjeta aquí
-            // itemView.setOnClickListener(v -> { ... });
+
         }
     }
 }
