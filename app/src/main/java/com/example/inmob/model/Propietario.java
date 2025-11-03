@@ -1,34 +1,41 @@
 package com.example.inmob.model;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class Propietario implements Serializable {
 
 
-
+    @Expose
     @SerializedName("idPropietario")
     private int id;
 
+    @Expose
     @SerializedName("dni")
     private String dni;
 
+    @Expose
     @SerializedName("apellido")
     private String apellido;
 
+    @Expose
     @SerializedName("nombre")
     private String nombre;
 
+    @Expose
     @SerializedName("email")
     private String email;
 
     @SerializedName("clave")
     private String password;
 
+    @Expose
     @SerializedName("telefono")
     private String telefono;
 
 
+    @Expose
     @SerializedName("avatar")
     private String avatar;
 

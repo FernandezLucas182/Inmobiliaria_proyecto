@@ -1,25 +1,35 @@
 package com.example.inmob.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.io.Serializable;
 
 public class Inmueble implements Serializable {
+    @Expose
     private int idInmueble;
+    @Expose
     private String direccion;
+    @Expose
     private String tipo;
-
+    @Expose
     private String uso;
+    @Expose
     private int ambientes;
+    @Expose
     private int superficie;
+    @Expose
     private double latitud;
-
+    @Expose
     private double longitud;;
-
+    @Expose
     private double valor;
+    @Expose
     private String  imagen;
+    @Expose
     private boolean disponible;
-
+    @Expose
     private int idPropietario;
-
+    @Expose
     private  Propietario duenio;
 
     public Inmueble() {

@@ -20,6 +20,7 @@ public class ApiClient {
 
             Gson gson = new GsonBuilder()
                     .setLenient()
+                    .excludeFieldsWithoutExposeAnnotation()
                     .create();
 
 

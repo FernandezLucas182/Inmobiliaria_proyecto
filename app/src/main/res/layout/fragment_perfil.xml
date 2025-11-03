@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:padding="24dp">
 
-        <!-- ... (Todos tus TextView y EditText hasta el de Teléfono se quedan igual) ... -->
+
         <TextView
             android:id="@+id/tvTituloPerfil"
             android:layout_width="wrap_content"
