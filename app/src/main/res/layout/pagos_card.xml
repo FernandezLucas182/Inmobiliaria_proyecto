@@ -1,45 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardPago"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:elevation="4dp"
-    android:padding="12dp"
-    android:background="?attr/selectableItemBackground"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginVertical="6dp"
     android:clickable="true"
-    android:focusable="true">
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
 
-    <LinearLayout
+    <!-- Usamos un ConstraintLayout para tener mejor control sobre la alineación -->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:padding="16dp">
 
+        <!-- Detalle del pago: ocupa la parte superior, más grande y en negrita -->
         <TextView
             android:id="@+id/tvDetallePago"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Detalle"
-            android:textStyle="bold" />
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/tvMontoPago"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Pago Alquiler #12" />
 
+        <!-- Fecha del pago: debajo del detalle, con un estilo más sutil -->
         <TextView
             android:id="@+id/tvFechaPago"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fecha" />
+            android:layout_marginTop="4dp"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDetallePago"
+            tools:text="15/05/2025" />
 
+        <!-- Monto del pago: alineado a la derecha, grande y con el color primario para destacar -->
         <TextView
             android:id="@+id/tvMontoPago"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Monto" />
+            android:layout_marginStart="16dp"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDetallePago"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvDetallePago"
+            tools:text="$50,000" />
 
+        <!-- Estado del pago: abajo a la derecha. Sin fondo, pero en negrita y con un color distintivo (verde) -->
         <TextView
             android:id="@+id/tvEstadoPago"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Estado"
-            android:textStyle="italic" />
+            android:layout_marginTop="8dp"
+            android:textColor="#4CAF50"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvMontoPago"
+            tools:text="PAGADO" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
