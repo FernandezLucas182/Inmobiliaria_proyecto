@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+
+import com.example.inmob.model.Contrato;
 import com.example.inmob.model.Inmueble;
+import com.example.inmob.model.Pago;
 import com.example.inmob.model.Propietario;
 
 import java.util.List;
@@ -19,6 +22,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 public interface ApiService {
 
@@ -74,7 +78,21 @@ public interface ApiService {
     );
 
 
+    @GET("api/contratos/inmueble/{id}")
+    Call<Contrato> obtenerContratoPorInmueble(
+            @Header("Authorization") String token,
+            @Path("id") int idInmueble
+    );
+    @GET("api/Inmuebles/GetContratoVigente")
+    Call<List<Inmueble>> obtenerInmueblesConContratoVigente(
+            @Header("Authorization") String token
+    );
 
+    @GET("api/pagos/contrato/{id}")
+    Call<List<Pago>> obtenerPagosPorContrato(
+            @Header("Authorization") String token,
+            @Path("id") int idContrato
+    );
 
 
 

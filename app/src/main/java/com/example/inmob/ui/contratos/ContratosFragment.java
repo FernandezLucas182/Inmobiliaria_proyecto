@@ -4,13 +4,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 
-// 1. CAMBIO: Importar la clase de Binding correcta
+
 import com.example.inmob.databinding.FragmentContratosBinding;
 
 public class ContratosFragment extends Fragment {
@@ -18,19 +20,31 @@ public class ContratosFragment extends Fragment {
 
     private FragmentContratosBinding binding;
 
+    private ContratosViewModel cvm;
+    private ContratosAdapter ca;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        ContratosViewModel contratosViewModel =
-                new ViewModelProvider(this).get(ContratosViewModel.class);
-
 
         binding = FragmentContratosBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
 
 
-        final TextView textView = binding.textContratos;
-        contratosViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return root;
+        cvm = new ViewModelProvider(this).get(ContratosViewModel.class);
+
+        binding.rvContratos.setLayoutManager(new GridLayoutManager(getContext(), 2));
+
+        cvm.getInmueblesAlquilados().observe(getViewLifecycleOwner(), inmuebles -> {
+            if (inmuebles != null && !inmuebles.isEmpty()) {
+                ca = new ContratosAdapter(inmuebles, getContext());
+                binding.rvContratos.setAdapter(ca);
+            } else {
+
+                binding.rvContratos.setAdapter(null);
+            }
+        });
+        cvm.cargarInmueblesAlquilados();
+
+        return binding.getRoot();
     }
 
     @Override

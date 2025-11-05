@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- PASO 1: El elemento raíz ahora es un CardView -->
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cvContrato"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="6dp">
+
+    <!-- PASO 2: Tu ConstraintLayout original ahora está DENTRO del CardView -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Tu contenido original no cambia, solo se ajustan las restricciones al nuevo padre -->
+        <ImageView
+            android:id="@+id/imgInmueble"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tvDireccion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Dirección del Inmueble"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imgInmueble"
+            app:layout_constraintTop_toTopOf="@+id/imgInmueble" />
+
+        <TextView
+            android:id="@+id/tvPrecio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="$ 0.00"
+            android:textColor="@color/design_default_color_primary"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/tvDireccion"
+            app:layout_constraintTop_toBottomOf="@+id/tvDireccion" />
+
+        <!-- Puedes añadir más TextViews aquí para el inquilino, fechas, etc. -->
+        <TextView
+            android:id="@+id/tvInquilino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Inquilino: Nombre Apellido"
+            app:layout_constraintStart_toStartOf="@+id/tvDireccion"
+            app:layout_constraintTop_toBottomOf="@+id/tvPrecio" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

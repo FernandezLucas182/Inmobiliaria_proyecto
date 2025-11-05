@@ -11,6 +11,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.inmob.InmobApp;
+import com.example.inmob.model.Contrato;
 import com.example.inmob.model.Inmueble;
 import com.example.inmob.request.ApiClient;
 import com.example.inmob.request.ApiService;
@@ -21,46 +22,40 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ContratosViewModel extends AndroidViewModel {
 
-    private final MutableLiveData<List<Inmueble>> inmueblesAlquilados = new MutableLiveData<>();
+public class DetalleContratoViewModel extends AndroidViewModel {
+    MutableLiveData <Contrato> contrato = new MutableLiveData<>();
 
-    public ContratosViewModel(@NonNull Application application) {
+    public DetalleContratoViewModel(@NonNull Application application) {
         super(application);
     }
 
-    public LiveData<List<Inmueble>> getInmueblesAlquilados() {
-
-        return inmueblesAlquilados;
+    public LiveData <Contrato> getContrato(){
+        return contrato;
     }
 
-    public void cargarInmueblesAlquilados() {
+    public void obtenerContratoPorInmueble(int idInmueble){
         String token = InmobApp.obtenerToken();
         ApiService api = ApiClient.getMyApiClient();
-        Call<List<Inmueble>> llamada = api.obtenerInmueblesConContratoVigente(token);
+        Call<Contrato> llamada = api.obtenerContratoPorInmueble(token, idInmueble);
         Log.d("TOKEN", "Token leído: " + token);
 
-        llamada.enqueue(new Callback<List<Inmueble>>() {
+        llamada.enqueue(new Callback<Contrato>() {
             @Override
-            public void onResponse(Call<List<Inmueble>> call, Response<List<Inmueble>> response) {
+            public void onResponse(Call<Contrato> call, Response<Contrato> response) {
                 if (response.isSuccessful()){
-                    inmueblesAlquilados.postValue(response.body());
+                    contrato.postValue(response.body());
                 } else {
-                    Toast.makeText(getApplication(), "No hay inmuebles disponibles: "+response.message(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplication(), "No hay contratos disponibles: "+response.message(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Inmueble>> call, Throwable t) {
+            public void onFailure(Call<Contrato> call, Throwable t) {
                 Toast.makeText(getApplication(), "Error en servidor: "+t.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.e("InmueblesViewModel", "Error en la llamada a la API", t);
+                Log.e("ContratoViewModel", "Error en la llamada a la API", t);
             }
 
         });
-
     }
-
-
-
-
 }
