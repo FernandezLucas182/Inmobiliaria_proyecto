@@ -39,23 +39,24 @@
             app:layout_constraintStart_toEndOf="@+id/imgInmueble"
             app:layout_constraintTop_toTopOf="@+id/imgInmueble" />
 
+        <!-- Puedes añadir más TextViews aquí para el inquilino, fechas, etc. -->
         <TextView
             android:id="@+id/tvPrecio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="40dp"
             android:text="$ 0.00"
             android:textColor="@color/design_default_color_primary"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@+id/tvDireccion"
             app:layout_constraintTop_toBottomOf="@+id/tvDireccion" />
 
-        <!-- Puedes añadir más TextViews aquí para el inquilino, fechas, etc. -->
         <TextView
             android:id="@+id/tvInquilino"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="40dp"
             android:text="Inquilino: Nombre Apellido"
             app:layout_constraintStart_toStartOf="@+id/tvDireccion"
             app:layout_constraintTop_toBottomOf="@+id/tvPrecio" />

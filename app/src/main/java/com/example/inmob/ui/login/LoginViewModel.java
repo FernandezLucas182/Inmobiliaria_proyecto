@@ -1,3 +1,4 @@
+// LoginViewModel.java
 package com.example.inmob.ui.login;
 
 import android.app.Application;
@@ -17,11 +18,18 @@ import retrofit2.Response;
 public class LoginViewModel extends AndroidViewModel {
 
     private final MutableLiveData<String> mError = new MutableLiveData<>();
-
     private final MutableLiveData<Boolean> loginExitosoEvent = new MutableLiveData<>();
+    private final SensorLiveData sensorLiveData;
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
+        // La lógica del sensor ahora vive en su propia clase LiveData
+        this.sensorLiveData = new SensorLiveData(application.getApplicationContext());
+    }
+
+    // LiveData para notificar a la vista que debe hacer la llamada
+    public LiveData<Boolean> getHacerLlamadaEvent() {
+        return sensorLiveData;
     }
 
     public LiveData<String> getError() {
@@ -50,9 +58,7 @@ public class LoginViewModel extends AndroidViewModel {
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Log.d("LoginVM", "Login exitoso. Token recibido.");
-
                     InmobApp.guardarToken(response.body());
-
                     loginExitosoEvent.postValue(true);
                 } else {
                     Log.d("LoginVM", "Respuesta no exitosa: " + response.code());
